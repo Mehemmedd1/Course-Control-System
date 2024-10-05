@@ -1,0 +1,17 @@
+package com.Mehemmed.CourseSystem.Model.Mybatis.employee;
+    import com.Mehemmed.CourseSystem.Model.Mybatis.base.BaseEntity;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Employee extends BaseEntity<Long> {
+
+    Long userId;
+
+}

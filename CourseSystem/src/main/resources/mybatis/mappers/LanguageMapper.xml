@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mehemmed.CourseSystem.Repository.LanguageRepository">
+
+    <select id="findAll" resultType="Language">
+        SELECT
+        <include refid="languageBaseColumns"/>
+        FROM languages l
+        WHERE l.is_deleted=false
+    </select>
+
+    <select id="findById" resultType="Language">
+        SELECT
+        <include refid="languageBaseColumns"/>
+        FROM languages l
+        WHERE l.id = #{id} and l.is_deleted = false
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO languages (name, has_localization, icon)
+        VALUES (#{name}, #{hasLocalization}, #{icon})
+    </insert>
+
+    <select id="getDefaultLanguage" resultType="Language">
+        SELECT
+        <include refid="languageBaseColumns"/>
+        FROM languages l
+        WHERE l.is_default = true and l.is_deleted = false
+    </select>
+
+    <select id="getAllLanguagesIsLocalize" resultType="Language">
+        SELECT
+        <include refid="languageBaseColumns"/>
+        FROM languages l
+        WHERE l.has_localization = true
+    </select>
+
+    <update id="update" parameterType="Language">
+        UPDATE languages l
+        SET name = #{name}, has_localization = #{hasLocalization}, icon = #{icon}
+        WHERE l.id = #{id};
+    </update>
+
+    <sql id="languageBaseColumns">
+        l.id,
+        l.name,
+        l.icon,
+        l.is_default,
+        l.has_localization,
+        l.is_deleted
+    </sql>
+
+</mapper>
